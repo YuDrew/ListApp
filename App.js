@@ -35,17 +35,20 @@ export default class App extends Component {
     const { data, isLoading } = this.state;
 
     return (
-      <View style={{ flex: 1, padding: 24 }}>
-        {isLoading ? <ActivityIndicator/> : (
-          <FlatList
-            data={data}
-            keyExtractor={({ id }, index) => id}
-            renderItem={({ item }) => (
-              <Text>{item.title}, {item.title_japanese}</Text>
-            )}
-          />
-        )}
-      </View>
+      <>
+        <Text>Cowboy Bebop Episodes</Text>
+        <View style={{ flex: 1, padding: 24 }}>
+          {isLoading ? <ActivityIndicator/> : (
+            <FlatList
+              data={data}
+              keyExtractor={({ id }, index) => id}
+              renderItem={({ item }) => (
+                <Text>{item.title}, {item.title_japanese}</Text>
+              )}
+            />
+          )}
+        </View>
+      </>
     );
   }
 };
