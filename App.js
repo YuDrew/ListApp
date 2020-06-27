@@ -7,7 +7,27 @@
  */
 
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+import { 
+  ActivityIndicator,
+  FlatList,
+  Text,
+  View,
+  StyleSheet
+} from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 50,
+  },
+  bigBlue: {
+    color: 'blue',
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  red: {
+    color: 'red',
+  },
+});
 
 export default class App extends Component {
   constructor(props) {
@@ -36,7 +56,7 @@ export default class App extends Component {
 
     return (
       <>
-        <Text>Cowboy Bebop Episodes</Text>
+        <Text style={styles.bigBlue}> Cowboy Bebop Episodes</Text>
         <View style={{ flex: 1, padding: 24 }}>
           {isLoading ? <ActivityIndicator/> : (
             <FlatList
