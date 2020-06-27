@@ -1,2 +1,2 @@
 # ListApp
- Just using a FlatList in React
+ Just using a FlatList in React to pull some sick anime eps
