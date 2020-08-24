@@ -6,6 +6,7 @@
  * @flow strict-local
  */
 
+import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { 
   ActivityIndicator,
@@ -14,6 +15,8 @@ import {
   View,
   StyleSheet
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +32,19 @@ const styles = StyleSheet.create({
   },
 });
 
+const Stack = createStackNavigator();
+
+class HomeScreen extends Component{
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: [],
+      isLoading: true
+    };
+  }//constructor
+}
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +53,7 @@ export default class App extends Component {
       data: [],
       isLoading: true
     };
-  }
+  }//constructor
 
   componentDidMount() {
     fetch('https://api.jikan.moe/v3/anime/1/episodes')
@@ -49,26 +65,34 @@ export default class App extends Component {
       .finally(() => {
         this.setState({ isLoading: false });
       });
-  }
+  }//componentDidMount
 
   render() {
     const { data, isLoading } = this.state;
 
     return (
       <>
-        <Text style={styles.bigBlue}> Cowboy Bebop Episodes</Text>
-        <View style={{ flex: 1, padding: 24 }}>
-          {isLoading ? <ActivityIndicator/> : (
-            <FlatList
-              data={data}
-              keyExtractor={({ id }, index) => id}
-              renderItem={({ item }) => (
-                <Text>{item.title}, {item.title_japanese}</Text>
-              )}
-            />
-          )}
-        </View>
+        <NavigationContainer>
+          <Stack.Navigator> 
+            <Stack.Screen name = "Home" component={
+              <>
+                <Text style={styles.bigBlue}> Cowboy Bebop Episodes</Text>
+                <View style={{ flex: 1, padding: 24 }}>
+                  {isLoading ? <ActivityIndicator/> : (
+                    <FlatList
+                      data={data}
+                      keyExtractor={({ id }, index) => id}
+                      renderItem={({ item }) => (
+                        <Text>{item.title}, {item.title_japanese}</Text>
+                      )}
+                    />
+                  )}
+                </View>
+              </>
+            }/>
+          </Stack.Navigator>
+        </NavigationContainer>
       </>
     );
-  }
+  }//render
 };
