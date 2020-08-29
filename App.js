@@ -74,7 +74,7 @@ export default class App extends Component {
       <>
         <NavigationContainer>
           <Stack.Navigator> 
-            <Stack.Screen name = "Home" component={
+            <Stack.Screen name = "Home Screen" component={
               <>
                 <Text style={styles.bigBlue}> Cowboy Bebop Episodes</Text>
                 <View style={{ flex: 1, padding: 24 }}>
